@@ -54,6 +54,9 @@ public class Main {
             case 1:
                 ContactBookservice.createContact();
                 break;
+            case 2:
+                ContactBookservice.listContact();
+                break;
         }
     }
 

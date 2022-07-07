@@ -5,6 +5,7 @@ import dao.IContactBook;
 import model.ContactBook;
 
 import java.io.PrintStream;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -40,6 +41,15 @@ public class ContactBookservice {
 
         contactBookDao.createContact(contactBook);
 
+    }
+
+    public static void listContact() throws SQLException{
+        ResultSet rs = contactBookDao.listContact();
+        PRINT_STREAM.printf("%-6s%-20s%-20s%-20s%-10s\n","ID","NAME","EMAIL","ADDRESS","CELPHONE");
+        while(rs.next()){
+            PRINT_STREAM.printf("%-6s%-20s%-20s%-20s%-10s\n",rs.getInt("id"),rs.getString("name"),rs.getString("email"),rs.getString("address"),rs.getLong("celPhone"));
+        }
+        PRINT_STREAM.println("CONTACT LIST SUCCESSFULLY");
     }
 
 

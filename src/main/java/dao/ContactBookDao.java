@@ -6,6 +6,7 @@ import model.ContactBook;
 import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ContactBookDao implements IContactBook {
@@ -28,5 +29,17 @@ public class ContactBookDao implements IContactBook {
             PRINT_STREAM.println(e);
         }
 
+    }
+
+    @Override
+    public ResultSet listContact() throws SQLException {
+        String query = "SELECT * FROM contactbook";
+        ResultSet rs = null;
+        try(PreparedStatement ps = CONNECTION.prepareStatement(query)) {
+            rs = ps.executeQuery();
+        }catch (SQLException e){
+            PRINT_STREAM.println(e);
+        }
+        return rs;
     }
 }

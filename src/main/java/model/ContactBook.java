@@ -7,13 +7,18 @@ public class ContactBook {
     private String address;
     private long celPhone;
 
-
+    public ContactBook() {
+    }
 
     public ContactBook(String name, String email, String address, long celPhone) {
         this.name = name;
         this.email = email;
         this.address = address;
         this.celPhone = celPhone;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {
@@ -50,5 +55,16 @@ public class ContactBook {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactBook{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", celPhone=" + celPhone +
+                '}';
     }
 }

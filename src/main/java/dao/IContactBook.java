@@ -11,4 +11,8 @@ public interface IContactBook {
 
     void deleteContact (long id);
 
+    void updateContact(ContactBook contactBook);
+
+    ContactBook getUser(int id);
+
 }

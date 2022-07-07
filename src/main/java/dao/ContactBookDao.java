@@ -54,11 +54,50 @@ public class ContactBookDao implements IContactBook {
     public void deleteContact(long id) {
         String query = "DELETE FROM contactbook WHERE id =?";
 
-        try(PreparedStatement ps = CONNECTION.prepareStatement(query)) {
-            ps.setLong(1,id);
+        try (PreparedStatement ps = CONNECTION.prepareStatement(query)) {
+            ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             PRINT_STREAM.println(e);
         }
+    }
+
+    @Override
+    public void updateContact(ContactBook contactBook) {
+        String query = "UPDATE contactbook.contactbook SET name = ?, email = ?, address = ?, celPhone = ? WHERE (id = ?)";
+        try (PreparedStatement ps = CONNECTION.prepareStatement(query)) {
+            ps.setString(1, contactBook.getName());
+            ps.setString(2, contactBook.getEmail());
+            ps.setString(3, contactBook.getAddress());
+            ps.setLong(4, contactBook.getCelPhone());
+            ps.setInt(5, contactBook.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            PRINT_STREAM.println(e);
+        }
+    }
+
+    @Override
+    public ContactBook getUser(int id) {
+        String query = "SELECT * FROM contactbook.contactbook WHERE id = ?";
+        ResultSet rs = null;
+        ContactBook contactBook = null;
+        try (PreparedStatement ps = CONNECTION.prepareStatement(query)) {
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                contactBook = new ContactBook();
+                contactBook.setId(rs.getInt("id"));
+                contactBook.setAddress(rs.getString("address"));
+                contactBook.setCelPhone(rs.getLong("celPhone"));
+                contactBook.setEmail(rs.getString("email"));
+                contactBook.setName(rs.getString("name"));
+
+            }
+
+        } catch (SQLException e) {
+            PRINT_STREAM.println(e);
+        }
+        return contactBook;
     }
 }

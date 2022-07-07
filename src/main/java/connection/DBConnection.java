@@ -27,7 +27,6 @@ public class DBConnection {
         Connection connection = null;
         try {
             connection= DriverManager.getConnection(URL,USUARIO,PASSWORD);
-            System.out.println("Conexion Exitosa");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Conexion Fallida" + e);
         }

@@ -8,9 +8,10 @@ import java.sql.SQLException;
 public class DBConnection {
     private static String DRIVER    ="com.mysql.jdbc.Driver";
     private static String USUARIO   ="root";
-    private static String PASSWORD  ="1234";
-    private static String URL       ="jdbc:mysql://localhost:3306/questionchallenge?useUnicode=true&characterEncoding=UTF-8";
+    private static String PASSWORD  ="M0r4l3s1027";
+    private static String URL       ="jdbc:mysql://localhost:3306/contactbook?useUnicode=true&characterEncoding=UTF-8";
 
+    private static Connection connection;
     static{
         try {
             Class.forName(DRIVER);
@@ -18,15 +19,19 @@ public class DBConnection {
             JOptionPane.showMessageDialog(null,"Error en el driver" + e);
         }
     }
-    public Connection getConnection(){
-        Connection con = null;
+
+    private DBConnection() {
+    }
+
+    public static Connection getConnection(){
+        Connection connection = null;
         try {
-            con= DriverManager.getConnection(URL,USUARIO,PASSWORD);
+            connection= DriverManager.getConnection(URL,USUARIO,PASSWORD);
             System.out.println("Conexion Exitosa");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Conexion Fallida" + e);
         }
-        return con;
+        return connection;
     }
 
 }

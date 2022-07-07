@@ -37,7 +37,7 @@ public class Main {
             actions(response);
         } while (response != 0);
 
-
+        PRINT_STREAM.println("Thanks for your visit");
     }
 
     private static int validateNumericValueMenu(String response) {
@@ -56,6 +56,9 @@ public class Main {
                 break;
             case 2:
                 ContactBookservice.listContact();
+                break;
+            case 3:
+                ContactBookservice.deleteContact();
                 break;
         }
     }

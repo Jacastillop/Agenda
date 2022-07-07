@@ -44,14 +44,20 @@ public class ContactBookservice {
     }
 
     public static void listContact() throws SQLException{
-        ResultSet rs = contactBookDao.listContact();
-        PRINT_STREAM.printf("%-6s%-20s%-20s%-20s%-10s\n","ID","NAME","EMAIL","ADDRESS","CELPHONE");
-        while(rs.next()){
-            PRINT_STREAM.printf("%-6s%-20s%-20s%-20s%-10s\n",rs.getInt("id"),rs.getString("name"),rs.getString("email"),rs.getString("address"),rs.getLong("celPhone"));
-        }
-        PRINT_STREAM.println("CONTACT LIST SUCCESSFULLY");
+       contactBookDao.listContact();
+
     }
 
+    public static void deleteContact(){
+        long id;
+        PRINT_STREAM.println("Insert id of contact");
+
+        do {
+            id = validateNumericValueMenu(SCANNER.nextLine());
+        }while (id ==-99);
+        contactBookDao.deleteContact(id);
+        PRINT_STREAM.println("Contact was delete successfully");
+    }
 
 
     private static long validateNumericValueMenu(String response) {
